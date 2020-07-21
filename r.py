@@ -41,7 +41,7 @@ def multiply(res1,money):
 
 def check(a):
     M=multiply(res1,money)
-    status,id = API.buy(M,"EURUSD",a,2)
+    status,id = API.buy(M,"EURUSD",a,5)
     p=API.check_win_v3(id)
     print(p)
     if p>0:
@@ -60,10 +60,10 @@ def res_len(res):
     
     
 def my_function():
-    i1=API.get_candles("EURUSD",120,1,time.time())[0]['id']
+    i1=API.get_candles("EURUSD",300,1,time.time())[0]['id']
     while True:
         end_from_time=time.time()
-        dat=API.get_candles("EURUSD",120,1,time.time())[0]
+        dat=API.get_candles("EURUSD",300,1,time.time())[0]
         i=dat['id']
         if i>i1:
             print("start")
@@ -71,7 +71,7 @@ def my_function():
     print("ok")
     while True:
         end_from_time=time.time()
-        data=API.get_candles("EURUSD",120,5, end_from_time)
+        data=API.get_candles("EURUSD",300,5, end_from_time)
         l=data
         res_len(res1)
         try:
@@ -86,5 +86,5 @@ def my_function():
             print(candle1.candle_score(l[3],l[2],l[1]),v1)
         else :
             None
-        time.sleep(1.5)
+        time.sleep(3)
 my_function()
