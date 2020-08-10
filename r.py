@@ -24,15 +24,12 @@ while True:
     	break
 
 
-#fore=s['forecast'][5]
-fore='100k'
-#act=s['previous'][5]
-act='500k'
-def buyoption(forecast,actual):
+
+def buyoption(forecast,actual,instrument):
   if forecast[0]>=actual[0]:
-    status,id = API.buy(200,"EURUSD",'put',1)
+    status,id = API.buy(200,instrument,'put',1)
   elif forecast[0]<=actual[0]:
-    status,id = API.buy(200,"EURUSD",'call',1)
+    status,id = API.buy(200,instrument,'call',1)
   else:
     None
 s=investpy.get_calendar('GMT +6:00','time_only',None,['high'],None,None,None)
@@ -40,7 +37,8 @@ try:
     print(s['currency'],s['previous'],s['actual'],s['forecast'])
 except:
     None
-i=int(input())
+instrument=str(input("Input instrument"))
+i=int(input("cordinate"))
 while True:
   s=investpy.get_calendar('GMT +6:00','time_only',None,['high'],None,None,None)
   fore=s['forecast'][i]
@@ -52,7 +50,7 @@ while True:
     newstr = ''.join((ch if ch in '0123456789.-e' else ' ') for ch in act)
     actual= [float(i) for i in newstr.split()]
     print(actual)
-    buyoption(forecast,actual)
+    buyoption(forecast,actual,instrument)
     break
   else:
     None
