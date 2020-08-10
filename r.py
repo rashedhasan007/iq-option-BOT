@@ -11,10 +11,10 @@ absl.logging._warn_preinit_stderr = False
 logging.basicConfig(filename='log.txt', filemode='w', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO, format='%(asctime)-15s %(message)s')
 logging.info('logs to file, as expected')
 from iqoptionapi.stable_api import IQ_Option
-
+seating=str(input('input REAL?PRACTIC'))
 API = IQ_Option("rashedhasanai@gmail.com","rostugbot007")
 API.connect()
-API.change_balance('PRACTICE') # PRACTICE / REAL
+API.change_balance(seating) # PRACTICE / REAL
 while True:
     if API.check_connect() == False:
     	print('Erro ao se conectar')
