@@ -41,7 +41,7 @@ def multiply(res1,money):
     
 def check(a):
     M=multiply(res1,money)
-    status,id = API.buy(M,"EURUSD",a,2)
+    status,id = API.buy(M,"EURUSD",a,1)
     p=API.check_win_v3(id)
     print(p)
     if p>0:
