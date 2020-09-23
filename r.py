@@ -65,7 +65,7 @@ while True:
     if i>i1:
         print("start")
         break
-    print("ok")
+ 
             
 total=[]        
     
