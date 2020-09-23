@@ -67,8 +67,7 @@ while True:
         break
     print("ok")
             
-    
-    
+total=[]        
     
 while True:
     end_from_time=time.time()
@@ -81,10 +80,16 @@ while True:
         None
     if t>0:
         v=check("call")
+        total.append(v)
         print(candle1.candle_score(l[3],l[2],l[1]),v)
+        print(sum(total))
+        time.sleep(5)
     elif t<0:
         v1=check("put")
+        total.append(v1)
         print(candle1.candle_score(l[3],l[2],l[1]),v1)
+        print(sum(total))
+        time.sleep(5)
     else :
         None
             
