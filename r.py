@@ -48,6 +48,7 @@ def check(a):
         res1.append('win')
     elif p<0:
         res1.append('loose')
+        time.sleep(900)
     else:
         None
     return p
