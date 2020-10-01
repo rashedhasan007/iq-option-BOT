@@ -15,10 +15,9 @@ def candle_score(lst_0,lst_1,lst_2):
     strCandle=''
     candle_score=0
     
-    if    bearish_harami:
-        strCandle=strCandle+'/ '+'bearish_harami'
+    if    Bearish_Engulfing:
+        strCandle=strCandle+'/ '+'Bearish_Engulfing'
         candle_score=candle_score-1
-    if    Bullish_Harami:
-        strCandle=strCandle+'/ '+'Bullish_Harami'
+    if    Bullish_Engulfing:
+        strCandle=strCandle+'/ '+'Bullish_Engulfing'
         candle_score=candle_score+1
-    return candle_score,strCandle
