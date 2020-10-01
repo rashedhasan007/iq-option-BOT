@@ -21,3 +21,4 @@ def candle_score(lst_0,lst_1,lst_2):
     if    Bullish_Engulfing:
         strCandle=strCandle+'/ '+'Bullish_Engulfing'
         candle_score=candle_score+1
+    return candle_score,strCandle
