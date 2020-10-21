@@ -21,18 +21,18 @@ while True:
     else:
         print('Conectado com sucesso')
         break
-res1=['win']
-money=[70,100,230,550,1275,3000]
+res1=['loose']
+money=[70,126,226,407]
 def multiply(res1,money):
-    if res1[len(res1)-1]=='win':
+    if res1[len(res1)-1]=='loose':
         return 70
-    elif res1[len(res1)-1]=='loose':
+    elif res1[len(res1)-1]=='win':
         i=len(res1)-1
         count=0
         while True:
-            if res1[i]=='win':
+            if res1[i]=='loose':
                 break
-            elif res1[i]=='loose':
+            elif res1[i]=='win':
                 count=count+1
             i=i-1
         return money[count]
