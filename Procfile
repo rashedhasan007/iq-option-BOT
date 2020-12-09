@@ -1,1 +1,1 @@
-worker: python r.py --log-file -
+clock: python r.py
