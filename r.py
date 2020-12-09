@@ -1,7 +1,9 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
-
+from tzlocal import get_localzone
+tz = get_localzone()
+print(tz)
 @sched.scheduled_job('interval', minutes=3)
 def timed_job():
     print('This job is run every three minutes.')
