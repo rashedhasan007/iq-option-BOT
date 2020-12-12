@@ -219,6 +219,7 @@ index=[1,2,3,4,5,6]
 
 while True:
     instrument1 = ["EURUSD", "AUDJPY", "USDJPY","AUDUSD","EURJPY","GBPUSD","EURNZD","EURGBP","USDCHF","GBPCAD","EURCAD","AUDCAD"]
+    instrument1=['EURUSD-OTC','AUDCAD-OTC','NZDUSD-OTC','USDCHF-OTC','EURGBP-OTC','GBPUSD-OTC','EURJPY-OTC']
     y={}
     y1 = json.dumps(y)
     # parsing JSON string:
