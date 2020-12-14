@@ -19,7 +19,7 @@ from iqoptionapi.stable_api import IQ_Option
 
 API = IQ_Option('rashedhasanai@gmail.com', 'rostugbot007')
 API.connect()
-API.change_balance('PRACTICE')  # PRACTICE / REAL
+API.change_balance('REAL')  # PRACTICE / REAL
 
 while True:
     if API.check_connect() == False:
@@ -218,8 +218,7 @@ index=[1,2,3,4,5,6]
 
 
 while True:
-    instrument1 = ["EURUSD", "AUDJPY", "USDJPY","AUDUSD","EURJPY","GBPUSD","EURNZD","EURGBP","USDCHF","GBPCAD","EURCAD","AUDCAD"]
-    instrument1=['EURUSD-OTC','AUDCAD-OTC','NZDUSD-OTC','USDCHF-OTC','EURGBP-OTC','GBPUSD-OTC','EURJPY-OTC']
+    instrument1 = ["EURUSD", "AUDJPY", "USDJPY","AUDUSD","EURJPY","GBPUSD","EURNZD","EURGBP","GBPCAD","EURCAD","EURCAD","GBPJPY"]
     y={}
     y1 = json.dumps(y)
     # parsing JSON string:
