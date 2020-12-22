@@ -200,15 +200,18 @@ def multiply(res1,money1,money2):
 #print(multiply(res1,money1,money2))
 
 def checker(a, j, instrument,):
-    status,id = API.buy(multiply(res1,money1,money2),instrument[j],a, 2)
-    bo = API.check_win_v3(id)
-    print(bo)
-    if bo < 0:
-        instrument.remove(instrument[j])
-        res1.append("loose")
-    else:
-        res1.append("win")
-        instrument.remove(instrument[j])
+    ALL_Asset=API.get_all_open_time()
+    #check if open or not
+    if ALL_Asset["forex"]["EURUSD"]["open"]==True:
+        status,id = API.buy(multiply(res1,money1,money2),instrument[j],a, 5)
+        bo = API.check_win_v3(id)
+        print(bo)
+        if bo < 0:
+            instrument.remove(instrument[j])
+            res1.append("loose")
+        else:
+            res1.append("win")
+            instrument.remove(instrument[j])
 
 def trendline(index,li, order=1):
     coeffs = np.polyfit(index, li, order)
@@ -226,7 +229,7 @@ while True:
 
     for i in range(len(instrument1)):
         instrument = instrument1.copy()
-        df = data(5, instrument[i],1000)
+        df = data(60, instrument[i],700)
         a = supres(df['Low'], df['High'], min_touches=2, stat_likeness_percent=5, bounce_percent=5)
 
         x1={
@@ -246,7 +249,7 @@ while True:
         d = API.get_candles(instrument[j], 1, 1, end_from_time)
         d =d[0]['close']
         #print(d)
-        rs=data(60,instrument[j],20)
+        rs=data(86400,instrument[j],20)
         rsi=rsiFunc(rs['Close'].tail(14), n=14)
         print(instrument[j],rsi[13])
         #trend=trendline(index,rs['Close'].tail(6), order=1)
