@@ -19,7 +19,7 @@ from iqoptionapi.stable_api import IQ_Option
 
 API = IQ_Option('rashedhasanai@gmail.com', 'rostugbot007')
 API.connect()
-API.change_balance('PRACTICE')  # PRACTICE / REAL
+API.change_balance('REAL')  # PRACTICE / REAL
 
 while True:
     if API.check_connect() == False:
@@ -163,7 +163,7 @@ def binary(direcao, par):
     return id
 
 res1=['start']
-money1=[70,126,226]
+money1=[70,80,90]
 money2=[70,90,200,306]
 def multiply(res1,money1,money2):
     if res1[len(res1) - 1] == 'start':
