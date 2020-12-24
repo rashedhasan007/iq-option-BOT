@@ -164,7 +164,7 @@ def binary(direcao, par):
 
 res1=['start']
 money1=[70,80,90]
-money2=[70,70,70,70]
+money2=[70,90,200,300]
 def multiply(res1,money1,money2):
     if res1[len(res1) - 1] == 'start':
         return 70
