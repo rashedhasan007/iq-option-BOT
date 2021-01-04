@@ -167,7 +167,7 @@ money1=[80,90,100]
 money2=[80,100,225]
 def multiply(res1,money1,money2):
     if res1[len(res1) - 1] == 'start':
-        return 70
+        return 80
     elif res1[len(res1) - 1] == 'loose':
         i = len(res1) - 1
         count = 0
@@ -179,7 +179,7 @@ def multiply(res1,money1,money2):
             i = i - 1
         if count >= len(money2):
             res1[i] == 'loose'
-            return 70
+            return 80
         else:
             return money2[count]
     elif res1[len(res1)-1]=='win':
@@ -193,7 +193,7 @@ def multiply(res1,money1,money2):
             i=i-1
         if count>=len(money1):
           res1[i]=='loose'
-          return 70
+          return 80
         else:
           return money1[count]
 
