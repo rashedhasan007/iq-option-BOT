@@ -19,7 +19,7 @@ from iqoptionapi.stable_api import IQ_Option
 
 API = IQ_Option('rashedhasanai@gmail.com', 'rostugbot007')
 API.connect()
-API.change_balance('REAL')  # PRACTICE / REAL
+API.change_balance('PRACTICE')  # PRACTICE / REAL
 
 while True:
     if API.check_connect() == False:
