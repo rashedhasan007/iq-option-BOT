@@ -199,7 +199,7 @@ def multiply(res1,money1,money2,current_money):
 def checker(a, j, instrument,res1,money1,money2,current_money):
     ALL_Asset=API.get_all_open_time()
     #check if open or not
-    if ALL_Asset["binary"][instrument[j]]["open"]==True:
+    if ALL_Asset["turbo"][instrument[j]]["open"]==True:
         status,id = API.buy(multiply(res1,money1,money2,current_money),instrument[j],a, 5)
         bo = API.check_win_v3(id)
         print(bo)
@@ -282,7 +282,7 @@ schedule.every().sunday.at("15:30").do(rani_take_lov)
 schedule.every().monday.at("13:15").do(rani_take_lov)
 schedule.every().wednesday.at("07:50").do(rani_take_lov)
 schedule.every().thursday.at("08:32").do(rani_take_lov)
-schedule.every().friday.at("10:13").do(rani_take_lov)
+schedule.every().friday.at("11:16").do(rani_take_lov)
 while True:
     schedule.run_pending()
     time.sleep(1)
