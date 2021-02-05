@@ -270,16 +270,19 @@ def rani_take_lov():
           t2 = time.localtime(time.time())
           t2 = t2[3] * 60 + t2[4]
       if current_value2-current_value1>=1.5*current_money:
+        print('today finished')
         break
       elif len(loss_count)>=2:
+        print('today finished')
         break
       else:
         None
+  
 schedule.every().sunday.at("15:30").do(rani_take_lov)
 schedule.every().monday.at("13:15").do(rani_take_lov)
 schedule.every().wednesday.at("07:50").do(rani_take_lov)
 schedule.every().thursday.at("08:32").do(rani_take_lov)
-schedule.every().friday.at("08:36").do(rani_take_lov)
+schedule.every().friday.at("08:58").do(rani_take_lov)
 while True:
     schedule.run_pending()
     time.sleep(1)
