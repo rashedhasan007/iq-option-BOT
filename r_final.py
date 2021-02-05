@@ -279,7 +279,7 @@ schedule.every().sunday.at("15:30").do(rani_take_lov)
 schedule.every().monday.at("13:15").do(rani_take_lov)
 schedule.every().wednesday.at("07:50").do(rani_take_lov)
 schedule.every().thursday.at("08:32").do(rani_take_lov)
-schedule.every().friday.at("20:20").do(rani_take_lov)
+schedule.every().friday.at("08:36").do(rani_take_lov)
 while True:
     schedule.run_pending()
     time.sleep(1)
