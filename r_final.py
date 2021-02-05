@@ -222,7 +222,7 @@ def rani_take_lov():
   current_money=current_money1*.028
   money1=[current_money,current_money+current_money*.12,current_money+current_money*.24]
   money2=[current_money,current_money/.80,(current_money/.80+current_money)/.80]
-  while ((current_value2-current_value1<=1.5*current_money) or (len(loss_count)<=2)):
+  while True:
       instrument1 = ["EURUSD", "AUDJPY", "USDJPY","AUDUSD","EURJPY","GBPUSD","EURNZD","EURGBP","GBPCAD","EURCAD","GBPAUD","GBPJPY"]
       y={}
       y1 = json.dumps(y)
@@ -269,9 +269,9 @@ def rani_take_lov():
               j = 0
           t2 = time.localtime(time.time())
           t2 = t2[3] * 60 + t2[4]
-      if current_value2-current_value1<=1.5*current_money:
+      if current_value2-current_value1>=1.5*current_money:
         break
-      elif len(loss_count)<=2:
+      elif len(loss_count)>=2:
         break
       else:
         None
