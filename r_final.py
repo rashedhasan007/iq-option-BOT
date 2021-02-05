@@ -1,4 +1,3 @@
-
 def warn(*args, **kwargs):
     pass
 import warnings
@@ -18,9 +17,9 @@ logging.basicConfig(filename='log.txt', filemode='w', datefmt='%Y-%m-%d %H:%M:%S
 logging.info('logs to file, as expected')
 from iqoptionapi.stable_api import IQ_Option
 
-API = IQ_Option('rashedhasanai@gmail.com', 'rostugbot007')
+API = IQ_Option('amazingalim@gmail.com', 'Googlesaibot4356@@')
 API.connect()
-API.change_balance('REAL')  # PRACTICE / REAL
+API.change_balance('PRACTICE')  # PRACTICE / REAL
 
 while True:
     if API.check_connect() == False:
@@ -162,13 +161,8 @@ def binary(direcao, par):
         None
     return id
 
-res1=['start']
-current_money1=API.get_currency()
-current_money1=int(current_money1)
-current_money=current_money1*.028
-money1=[current_money,current_money+current_money*.12,current_money+current_money*.24]
-money2=[current_money,current_money/.80,(current_money/.80+current_money)/.80]
-def multiply(res1,money1,money2):
+
+def multiply(res1,money1,money2,current_money):
     if res1[len(res1) - 1] == 'start':
         return current_money
     elif res1[len(res1) - 1] == 'loose':
@@ -202,11 +196,11 @@ def multiply(res1,money1,money2):
 
 #print(multiply(res1,money1,money2))
 
-def checker(a, j, instrument,):
+def checker(a, j, instrument,res1,money1,money2,current_money):
     ALL_Asset=API.get_all_open_time()
     #check if open or not
-    if ALL_Asset["forex"]["EURUSD"]["open"]==True:
-        status,id = API.buy(multiply(res1,money1,money2),instrument[j],a, 5)
+    if ALL_Asset["binary"][instrument[j]]["open"]==True:
+        status,id = API.buy(multiply(res1,money1,money2,current_money),instrument[j],a, 5)
         bo = API.check_win_v3(id)
         print(bo)
         if bo < 0:
@@ -218,9 +212,17 @@ def checker(a, j, instrument,):
 
 current_value1=API.get_balance()
 current_value2=0
-def rani_take_love():
-
-  while (current_value2-current_value1<=1.5*current_money):
+def rani_take_lov():
+  current_value2=0
+  print('start')
+  res1=['start']
+  loss_count=[]
+  current_money1=API.get_balance()
+  current_money1=int( current_money1)
+  current_money=current_money1*.028
+  money1=[current_money,current_money+current_money*.12,current_money+current_money*.24]
+  money2=[current_money,current_money/.80,(current_money/.80+current_money)/.80]
+  while ((current_value2-current_value1<=1.5*current_money) or (len(loss_count)<=2)):
       instrument1 = ["EURUSD", "AUDJPY", "USDJPY","AUDUSD","EURJPY","GBPUSD","EURNZD","EURGBP","GBPCAD","EURCAD","GBPAUD","GBPJPY"]
       y={}
       y1 = json.dumps(y)
@@ -242,8 +244,7 @@ def rani_take_love():
           print(x1)
       p = json.dumps(z)
       p = json.loads(p)
-
-      while ((t2 - t1 <= 15) or (current_value2-current_value1<=1.5*current_money)):
+      while (t2 - t1 <= 15):
           end_from_time = time.time()
           d = API.get_candles(instrument[j], 1, 1, end_from_time)
           d =d[0]['close']
@@ -256,22 +257,28 @@ def rani_take_love():
           if p[''+instrument[j]]['support'] != None:
               if d<=p[''+instrument[j]]['support'] and rsi[13]>50:
                   print('this instrument',instrument[j])
-                  checker('call', j, instrument)
+                  checker('call', j, instrument,res1,money1,money2,current_money)
                   print('done')
           if p[''+instrument[j]]['resistance'] != None:
               if d>=p[''+instrument[j]]['resistance'] and rsi[13]<50:
                   print('this instrument',instrument[j])
-                  checker('put', j, instrument)
+                  checker('put', j, instrument,res1,money1,money2,current_money)
                   print('done')
           j = j+1
           if j == len(instrument)-1:
               j = 0
           t2 = time.localtime(time.time())
           t2 = t2[3] * 60 + t2[4]
-schedule.every().sunday.at("13:15").do(rani_take_love)
-schedule.every().monday.at("13:15").do(rani_take_love)
-schedule.every().wednesday.at("13:15").do(rani_take_love)
-schedule.every().thursday.at("13:15").do(rani_take_love)
+      if current_value2-current_value1<=1.5*current_money:
+        break
+      elif len(loss_count)<=2:
+        break
+      else:
+        None
+schedule.every().sunday.at("15:30").do(rani_take_lov)
+schedule.every().monday.at("13:15").do(rani_take_lov)
+schedule.every().wednesday.at("07:50").do(rani_take_lov)
+schedule.every().thursday.at("08:32").do(rani_take_lov)
 while True:
     schedule.run_pending()
     time.sleep(1)
