@@ -19,7 +19,7 @@ from iqoptionapi.stable_api import IQ_Option
 
 API = IQ_Option('rashedhasanai@gmail.com', 'rostugbot007')
 API.connect()
-API.change_balance('REAL')  # PRACTICE / REAL
+API.change_balance('PRACTICE')  # PRACTICE / REAL
 
 while True:
     if API.check_connect() == False:
@@ -261,12 +261,12 @@ while True:
         if p[''+instrument[j]]['support'] != None:
             if d<=p[''+instrument[j]]['support'] and rsi[13]>50:
                 print('this instrument',instrument[j])
-                checker('call', j, instrument)
+                checker('call', j, instrument,money1,money2)
                 print('done')
         if p[''+instrument[j]]['resistance'] != None:
             if d>=p[''+instrument[j]]['resistance'] and rsi[13]<50:
                 print('this instrument',instrument[j])
-                checker('put', j, instrument)
+                checker('put', j, instrument,money1,money2)
                 print('done')
         j = j+1
         if j == len(instrument)-1:
