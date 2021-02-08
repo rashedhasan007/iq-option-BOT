@@ -204,10 +204,10 @@ def multiply(res1,money1,money2):
 
 #print(multiply(res1,money1,money2))
 
-def checker(a, j, instrument,):
+def checker(a, j, instrument,money1,money2):
     ALL_Asset=API.get_all_open_time()
     #check if open or not
-    if ALL_Asset["forex"]["EURUSD"]["open"]==True:
+    if ALL_Asset["turbo"][instrument[j]]["open"]==True:
         status,id = API.buy(multiply(res1,money1,money2),instrument[j],a, 5)
         bo = API.check_win_v3(id)
         print(bo)
