@@ -170,9 +170,9 @@ current_money1=int( current_money1)
 current_money=current_money1*.028
 money1=[current_money,current_money+current_money*.12,current_money+current_money*.24]
 money2=[current_money,current_money/.80,(current_money/.80+current_money)/.80]
-def multiply(res1,money1,money2):
+def multiply(res1,money1,money2,current_money):
     if res1[len(res1) - 1] == 'start':
-        return 80
+        return current_money
     elif res1[len(res1) - 1] == 'loose':
         i = len(res1) - 1
         count = 0
@@ -184,7 +184,7 @@ def multiply(res1,money1,money2):
             i = i - 1
         if count >= len(money2):
             res1[i] == 'loose'
-            return 80
+            return current_money
         else:
             return money2[count]
     elif res1[len(res1)-1]=='win':
@@ -198,17 +198,17 @@ def multiply(res1,money1,money2):
             i=i-1
         if count>=len(money1):
           res1[i]=='loose'
-          return 80
+          return current_money
         else:
           return money1[count]
 
 #print(multiply(res1,money1,money2))
 
-def checker(a, j, instrument,money1,money2):
+def checker(a, j, instrument,money1,money2,current_money):
     ALL_Asset=API.get_all_open_time()
     #check if open or not
     if ALL_Asset["turbo"][instrument[j]]["open"]==True:
-        status,id = API.buy(multiply(res1,money1,money2),instrument[j],a, 5)
+        status,id = API.buy(multiply(res1,money1,money2,current_money),instrument[j],a, 5)
         bo = API.check_win_v3(id)
         print(bo)
         if bo < 0:
@@ -261,12 +261,12 @@ while True:
         if p[''+instrument[j]]['support'] != None:
             if d<=p[''+instrument[j]]['support'] and rsi[13]>50:
                 print('this instrument',instrument[j])
-                checker('call', j, instrument,money1,money2)
+                checker('call', j, instrument,money1,money2,current_money)
                 print('done')
         if p[''+instrument[j]]['resistance'] != None:
             if d>=p[''+instrument[j]]['resistance'] and rsi[13]<50:
                 print('this instrument',instrument[j])
-                checker('put', j, instrument,money1,money2)
+                checker('put', j, instrument,money1,money2,current_money)
                 print('done')
         j = j+1
         if j == len(instrument)-1:
