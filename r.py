@@ -217,7 +217,7 @@ def checker(a, j, instrument,money1,money2,current_money):
         if bo < 0:
             instrument.remove(instrument[j])
             res1.append("loose")
-        elif b0>0:
+        elif bo>0:
             res1.append("win")
             instrument.remove(instrument[j])
         else:
