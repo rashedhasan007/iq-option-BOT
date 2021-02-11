@@ -167,7 +167,10 @@ res1=['start']
 #money2=[80,100,225]
 current_money1=API.get_balance()
 current_money1=int( current_money1)
-current_money=current_money1*.028
+current_money_old=current_money1*.028
+ar_money=[]
+ar_money.append(current_money_old)
+current_money=ar_money[0]
 money1=[current_money,current_money+current_money*.12,current_money+current_money*.24]
 money2=[current_money,current_money/.80,(current_money/.80+current_money)/.80]
 def multiply(res1,money1,money2,current_money):
