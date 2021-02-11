@@ -217,9 +217,11 @@ def checker(a, j, instrument,money1,money2,current_money):
         if bo < 0:
             instrument.remove(instrument[j])
             res1.append("loose")
-        else:
+        elif b0>0:
             res1.append("win")
             instrument.remove(instrument[j])
+        else:
+            None
 
 def trendline(index,li, order=1):
     coeffs = np.polyfit(index, li, order)
