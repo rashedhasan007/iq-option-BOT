@@ -196,7 +196,7 @@ def multiply(res1,money1,money2,current_money):
 
 #print(multiply(res1,money1,money2))
 
-def checker(a, j, instrument,res1,money1,money2,current_money):
+def checker(a, j, instrument,res1,money1,money2,current_money,loss_count):
     ALL_Asset=API.get_all_open_time()
     #check if open or not
     if ALL_Asset["turbo"][instrument[j]]["open"]==True:
@@ -206,9 +206,12 @@ def checker(a, j, instrument,res1,money1,money2,current_money):
         if bo < 0:
             instrument.remove(instrument[j])
             res1.append("loose")
-        else:
+            loss_count.append('loose')
+        elif bo>0:
             res1.append("win")
             instrument.remove(instrument[j])
+        else:
+            None
 
 current_value1=API.get_balance()
 current_value2=0
@@ -257,12 +260,12 @@ def rani_take_lov():
           if p[''+instrument[j]]['support'] != None:
               if d<=p[''+instrument[j]]['support'] and rsi[13]>50:
                   print('this instrument',instrument[j])
-                  checker('call', j, instrument,res1,money1,money2,current_money)
+                  checker('call', j, instrument,res1,money1,money2,current_money,loss_count)
                   print('done')
           if p[''+instrument[j]]['resistance'] != None:
               if d>=p[''+instrument[j]]['resistance'] and rsi[13]<50:
                   print('this instrument',instrument[j])
-                  checker('put', j, instrument,res1,money1,money2,current_money)
+                  checker('put', j, instrument,res1,money1,money2,current_money,loss_count)
                   print('done')
           j = j+1
           if j == len(instrument)-1:
@@ -282,7 +285,7 @@ schedule.every().sunday.at("15:30").do(rani_take_lov)
 schedule.every().monday.at("13:15").do(rani_take_lov)
 schedule.every().wednesday.at("07:50").do(rani_take_lov)
 schedule.every().thursday.at("08:32").do(rani_take_lov)
-schedule.every().friday.at("11:16").do(rani_take_lov)
+schedule.every().friday.at("1:55").do(rani_take_lov)
 while True:
     schedule.run_pending()
     time.sleep(1)
