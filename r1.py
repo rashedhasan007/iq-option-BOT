@@ -16,7 +16,7 @@ logging.basicConfig(filename='log.txt', filemode='w', datefmt='%Y-%m-%d %H:%M:%S
 logging.info('logs to file, as expected')
 from iqoptionapi.stable_api import IQ_Option
 
-API = IQ_Option('rashedhasanai@gmail.com', 'rostugbot007')
+API = IQ_Option('amazingalim@gmail.com', 'Googlesaibot4356@@')
 API.connect()
 API.change_balance('PRACTICE')  # PRACTICE / REAL
 
