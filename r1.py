@@ -4,7 +4,6 @@ def warn(*args, **kwargs):
 import warnings
 warnings.warn = warn
 import pandas as pd
-import datetime
 import time
 import logging
 import json
@@ -158,7 +157,7 @@ def binary(direcao, par):
     try:
         id = API.buy(1, par, direcao,2)
     except:
-        None
+        print("trade miss")
     return id
 
 res1=['start']
@@ -204,9 +203,10 @@ def multiply(res1,money1,money2,current_money):
 def checker(a, j, instrument,money1,money2,current_money):
     ALL_Asset=API.get_all_open_time()
     #check if open or not
+    money_value=0
     if ALL_Asset["turbo"][instrument[j]]["open"]==True:
         money_value=multiply(res1,money1,money2,current_money)
-        status,id = API.buy(money_value,instrument[j],a, 5)
+        status,id = API.buy(money_value,instrument[j],a, 1)
         bo = API.check_win_v3(id)
         print(bo)
         if bo < 0:
@@ -216,14 +216,26 @@ def checker(a, j, instrument,money1,money2,current_money):
             res1.append("win")
             instrument.remove(instrument[j])
         else:
-            None
+            print('equal')
     return money_value
 
-
+def traderoom(p,instrument,j,money1,money2,current_money):
+    get_money=0
+    if p['' + instrument[j]]['support'] != None:
+        if d <= p['' + instrument[j]]['support'] and rsi[13] > 50:
+            print('this instrument', instrument[j])
+            get_money = checker('call', j, instrument, money1, money2, current_money)
+            print('done')
+    if p['' + instrument[j]]['resistance'] != None:
+        if d >= p['' + instrument[j]]['resistance'] and rsi[13] < 50:
+            print('this instrument', instrument[j])
+            get_money = checker('put', j, instrument, money1, money2, current_money)
+            print('done')
+    return get_money
 
 
 while True:
-    instrument1 = ["EURUSD", "AUDJPY", "USDJPY","AUDUSD","EURJPY","GBPUSD","EURNZD","EURGBP","GBPCAD","EURCAD","GBPAUD","GBPJPY"]
+    instrument1 = ["EURUSD-OTC", "AUDJPY-OTC", "USDJPY-OTC","AUDUSD-OTC","EURJPY-OTC","GBPUSD-OTC","EURNZD-OTC","EURGBP-OTC","GBPCAD-OTC","EURCAD-OTC","GBPAUD-OTC","GBPJPY-OTC"]
     y={}
     y1 = json.dumps(y)
     # parsing JSON string:
@@ -238,40 +250,35 @@ while True:
             ""+str(instrument[i]): {"support":a[0],"resistance":a[1]}
         }
         z.update(x1)
-        t1 = time.localtime(time.time())
-        t1 = t1[3] * 60 + t1[4]
-        t2 = 0
-        j = 0
         print(x1)
+    t1 = time.localtime(time.time())
+    t1 = t1[3] * 60 + t1[4]
+    t2 = 0
     p = json.dumps(z)
     p = json.loads(p)
+    j = 0
 
-    while (t2 - t1 <= 15):
+    while True:
         end_from_time = time.time()
         d = API.get_candles(instrument[j], 1, 1, end_from_time)
         d =d[0]['close']
+        get_money=0
         #print(d)
         rs=data(86400,instrument[j],20)
         rsi=rsiFunc(rs['Close'].tail(14), n=14)
         print(instrument[j],rsi[13])
-        #trend=trendline(index,rs['Close'].tail(6), order=1)
-        if p[''+instrument[j]]['support'] != None:
-            if d<=p[''+instrument[j]]['support'] and rsi[13]>50:
-                print('this instrument',instrument[j])
-                get_money=checker('call', j, instrument,money1,money2,current_money)
-                print('done')
-        if p[''+instrument[j]]['resistance'] != None:
-            if d>=p[''+instrument[j]]['resistance'] and rsi[13]<50:
-                print('this instrument',instrument[j])
-                get_money=checker('put', j, instrument,money1,money2,current_money)
-                print('done')
+        get_money1=traderoom(p,instrument,j,money1,money2,current_money)
         j = j+1
-        if j == len(instrument)-1:
-            j = 0
         t2 = time.localtime(time.time())
         t2 = t2[3] * 60 + t2[4]
-        current_money1 = API.get_balance()
-        if (get_money==money2[len(money2)-1] or current_money1>=1.5*(money1[0])):
+        current_money2 = API.get_balance()
+        if j == len(instrument)-1:
+            j = 0
+        elif (get_money1==money2[len(money2)-1] or (current_money2-current_money1)>=1.5*(money1[0])):
             break
-    if (get_money==money2[len(money2)-1] or current_money1>=1.5*(money1[0])):
+        elif(t2 - t1 >= 15):
+            break
+        else:
+            None
+    if (get_money1==money2[len(money2)-1] or (current_money2-current_money1)>=1.5*(money1[0])):
         break
