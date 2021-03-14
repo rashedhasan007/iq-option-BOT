@@ -162,7 +162,7 @@ def binary(direcao, par):
 
 res1=['start']
 money1=[3.80,4.80,5.80]
-money2=[3.80,,7.92,14.49]
+money2=[3.80,7.92,14.49]
 current_money=2.83
 current_money1=API.get_balance()
 
