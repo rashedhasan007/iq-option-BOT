@@ -235,7 +235,7 @@ def traderoom(p,instrument,j,money1,money2,current_money):
 
 
 while True:
-    instrument1 = ["EURUSD", "AUDJPY", "USDJPY","AUDUSD","EURJPY","GBPUSD","EURNZD","EURGBP","GBPCAD","EURCAD","GBPAUD","GBPJPY"]
+    instrument1 = ["EURUSD-OTC", "AUDJPY-OTC", "USDJPY-OTC","AUDUSD-OTC","EURJPY-OTC","GBPUSD-OTC","EURNZD-OTC","EURGBP-OTC","GBPCAD-OTC","EURCAD-OTC","GBPAUD-OTC","GBPJPY-OTC"]
     y={}
     y1 = json.dumps(y)
     # parsing JSON string:
