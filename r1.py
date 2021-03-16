@@ -161,9 +161,9 @@ def binary(direcao, par):
     return id
 
 res1=['start']
-money1=[2.83,3.80,4.80,5.80]
-money2=[2.83,3.80,7.92,14.49]
-current_money=2.83
+money1=[1.5,3.80,8,14,16,18]
+money2=[1.5,3,6,13,26.75,56]
+current_money=1.5
 current_money1=API.get_balance()
 
 def multiply(res1,money1,money2,current_money):
