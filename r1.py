@@ -16,9 +16,9 @@ logging.basicConfig(filename='log.txt', filemode='w', datefmt='%Y-%m-%d %H:%M:%S
 logging.info('logs to file, as expected')
 from iqoptionapi.stable_api import IQ_Option
 
-API = IQ_Option('amazingalim@gmail.com', 'Googlesaibot4356@@')
+API = IQ_Option('zinnatunesaera@gmail.com', 'googlesaibot435')
 API.connect()
-API.change_balance('PRACTICE')  # PRACTICE / REAL
+API.change_balance('REAL')  # PRACTICE / REAL
 
 while True:
     if API.check_connect() == False:
@@ -161,8 +161,8 @@ def binary(direcao, par):
     return id
 
 res1=['start']
-money1=[1.5,3.80,8,14,16,18]
-money2=[1.5,3,6,13,26.75,56]
+money1=[1.41,2,2.5]
+money2=[1.41,2,4.2]
 current_money=1.5
 current_money1=API.get_balance()
 
