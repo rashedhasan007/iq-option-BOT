@@ -18,7 +18,7 @@ from iqoptionapi.stable_api import IQ_Option
 
 API = IQ_Option('zinnatunnesaera@gmail.com', 'googlesaibot435')
 API.connect()
-API.change_balance('REAL')  # PRACTICE / REAL
+API.change_balance('practice')  # PRACTICE / REAL
 
 while True:
     if API.check_connect() == False:
