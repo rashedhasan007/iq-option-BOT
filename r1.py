@@ -206,7 +206,7 @@ def checker(a, j, instrument,money1,money2,current_money):
     money_value=0
     if ALL_Asset["turbo"][instrument[j]]["open"]==True:
         money_value=multiply(res1,money1,money2,current_money)
-        status,id = API.buy(money_value,instrument[j],a, 5)
+        status,id = API.buy(money_value,instrument[j],a, 20)
         bo = API.check_win_v3(id)
         print(bo)
         if bo < 0:
@@ -243,7 +243,7 @@ while True:
 
     for i in range(len(instrument1)):
         instrument = instrument1.copy()
-        df = data(60, instrument[i],700)
+        df = data(300, instrument[i],700)
         a = supres(df['Low'], df['High'], min_touches=2, stat_likeness_percent=5, bounce_percent=5)
 
         x1={
