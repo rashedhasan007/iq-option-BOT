@@ -203,25 +203,29 @@ def take_lov():
       y1 = json.dumps(y)
       # parsing JSON string:
       z = json.loads(y1)
+      instrument=[]
       for i in range(len(instrument1)):
-          instrument = instrument1.copy()
+          instruments = instrument1.copy()
           ALL_Asset=API.get_all_open_time()
-          if ALL_Asset[instrument[i]]["EURUSD"]["open"]==True:
-            df = data(60, instrument[i],700)
+          print(ALL_Asset["cfd"][instruments[i]]["open"])
+          if ALL_Asset["cfd"][instruments[i]]["open"]==True:
+            df = data(60, instruments[i],700)
             a = supres(df['Low'], df['High'], min_touches=2, stat_likeness_percent=5, bounce_percent=5)
   
             x1={
-                ""+str(instrument[i]):{"support":a[0],"resistance":a[1]}
+                ""+str(instruments[i]):{"support":a[0],"resistance":a[1]}
             }
             z.update(x1)
-            t1 = time.localtime(time.time())
-            t1 = t1[3] * 60 + t1[4]
-            t2 = 0
-            j = 0
             print(x1)
+            instrument.append(instruments[i])
           else:
             None
+          t1 = time.localtime(time.time())
+          t1 = t1[3] * 60 + t1[4]
+          t2 = 0
+          j = 0
       print(instrument)
+      print(z)
       p = json.dumps(z)
       p = json.loads(p)
       while (t2 - t1 <= 15):
